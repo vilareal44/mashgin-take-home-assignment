@@ -10,7 +10,7 @@ async function main() {
 
 // Seed categories
 async function seedCategories() {
-  await prisma.category.createMany({
+  await prisma.menuCategory.createMany({
     data: [
       {
         id: 1,
@@ -34,7 +34,7 @@ async function seedCategories() {
 
 // Seed items
 async function seedItems() {
-  await prisma.item.createMany({
+  await prisma.menuItem.createMany({
     data: [
       {
         id: 1,

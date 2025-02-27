@@ -5,58 +5,85 @@ generator client {
   provider = "prisma-client-js"
 }
 
+/// NOTE: I'm using sqlite for the sake of simplicity. 
+/// In a real project, I would use a more robust database like MySQL.
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-model Category {
+/// Represents the possible states of a payment
+/// We will always assume the payment was successful (COMPLETED) for now
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+/// Represents a category of items in the menu
+model MenuCategory {
   id      Int     @id @default(autoincrement())
   imageId String
   name    String? @unique
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Item      Item[]
+  items MenuItem[]
 
-  @@map("categories")
+  @@map("menu_categories")
 }
 
-model Item {
-  id         Int      @id @default(autoincrement())
+/// Represents an item in the menu
+model MenuItem {
+  id         Int          @id @default(autoincrement())
   imageId    String
-  name       String?  @unique
+  name       String?      @unique
   price      Float
-  category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  category   MenuCategory @relation(fields: [categoryId], references: [id])
 
   orders OrderItem[]
 
   @@map("items")
 }
 
+/// Represents an order
 model Order {
-  id        Int         @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   total     Float
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  items     OrderItem[]
+  createdAt DateTime @default(now())
+
+  items   OrderItem[]
+  payment OrderPayment?
 
   @@map("orders")
 }
 
+/// Represents the items in an order
 model OrderItem {
-  order   Order @relation(fields: [orderId], references: [id])
-  orderId Int
-  item    Item  @relation(fields: [itemId], references: [id])
-  itemId  Int
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  order    Order    @relation(fields: [orderId], references: [id])
+  orderId  Int
+  item     MenuItem @relation(fields: [itemId], references: [id])
+  itemId   Int
+  quantity Int
 
   @@id([orderId, itemId])
   @@map("order_items")
+}
+
+/// Represents the payment for an order
+/// NOTES: 
+/// 1) I'm aware that it is not a good practice to store credit card info in the database.
+///    In a real project, I would use a more secure approach for payment processing.
+/// 2) Assuming the payment was successful (COMPLETED) for now
+model OrderPayment {
+  id               Int           @id @default(autoincrement())
+  order            Order         @relation(fields: [orderId], references: [id])
+  orderId          Int           @unique
+  amount           Float
+  status           PaymentStatus @default(COMPLETED)
+  creditCardNumber String
+  expirationDate   DateTime
+  cvc              Int
+  address          String
+
+  @@map("order_payments")
 }
