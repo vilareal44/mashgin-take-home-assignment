@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id      Int     @id @default(autoincrement())
+  imageId String
+  name    String? @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Item      Item[]
+
+  @@map("categories")
+}
+
+model Item {
+  id         Int      @id @default(autoincrement())
+  imageId    String
+  name       String?  @unique
+  price      Float
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders OrderItem[]
+
+  @@map("items")
+}
+
+model Order {
+  id        Int         @id @default(autoincrement())
+  total     Float
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  items     OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  order   Order @relation(fields: [orderId], references: [id])
+  orderId Int
+  item    Item  @relation(fields: [itemId], references: [id])
+  itemId  Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([orderId, itemId])
+  @@map("order_items")
+}
