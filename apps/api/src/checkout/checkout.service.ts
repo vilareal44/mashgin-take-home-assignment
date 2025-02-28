@@ -6,9 +6,9 @@ import { PrismaService } from 'src/shared/prisma.service';
 export class CheckoutService {
   constructor(private readonly prisma: PrismaService) { }
 
-  create(createCheckoutDto: CreateCheckoutDto) {
+  async create(createCheckoutDto: CreateCheckoutDto) {
     const { name, creditCardNumber, expirationDate, cvc, address, total, items } = createCheckoutDto;
-    this.prisma.order.create({
+    const order = await this.prisma.order.create({
       data: {
         total,
         items: {
@@ -21,14 +21,16 @@ export class CheckoutService {
         },
         payment: {
           create: {
+            name,
             amount: total,
             creditCardNumber,
-            expirationDate: new Date(expirationDate),
+            expirationDate: new Date(`${expirationDate.split('/')[1]}-${expirationDate.split('/')[0]}-01`),
             cvc: parseInt(cvc),
             address,
           }
         }
       }
     })
+    return order;
   }
 }

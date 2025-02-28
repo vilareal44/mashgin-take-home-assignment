@@ -80,6 +80,7 @@ model OrderPayment {
   orderId          Int           @unique
   amount           Float
   status           PaymentStatus @default(COMPLETED)
+  name             String?
   creditCardNumber String
   expirationDate   DateTime
   cvc              Int
