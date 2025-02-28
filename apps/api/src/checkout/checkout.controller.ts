@@ -1,6 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes } from '@nestjs/common';
+import { Controller, Post, Body, UsePipes } from '@nestjs/common';
 import { CheckoutService } from './checkout.service';
-import { CreateCheckoutDto, createCheckoutSchema } from './dto/create-checkout.dto';
+import {
+  CreateCheckoutDto,
+  createCheckoutSchema,
+} from './dto/create-checkout.dto';
 import { ZodValidationPipe } from '../zod-validation-pipe';
 
 /**
@@ -8,7 +11,7 @@ import { ZodValidationPipe } from '../zod-validation-pipe';
  */
 @Controller('checkout')
 export class CheckoutController {
-  constructor(private readonly checkoutService: CheckoutService) { }
+  constructor(private readonly checkoutService: CheckoutService) {}
 
   /**
    * Creates a new checkout order

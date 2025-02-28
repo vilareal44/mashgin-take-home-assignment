@@ -7,5 +7,7 @@
   "conventionalCommits.scopes": [
     "api",
     "web"
-  ]
+  ],
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false
 }
