@@ -8,7 +8,7 @@ import { Logger } from '@nestjs/common';
  */
 async function bootstrap() {
   const port = process.env.PORT ?? 3001;
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   await app.listen(port);
   Logger.log(`Server is running on port ${port}`);
 }
