@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, ParseIntPipe } from '@nestjs/common';
 import { MenuService } from './menu.service';
 
 /**
@@ -15,8 +15,7 @@ export class MenuController {
    * @returns A promise resolving to an array of menu items
    */
   @Get()
-  getMenu(@Query('categoryId') categoryId?: string) {
-    const categoryIdNumber = categoryId ? parseInt(categoryId, 10) : undefined;
-    return this.menuService.getMenu(categoryIdNumber);
+  getMenu(@Query('categoryId', new ParseIntPipe({ optional: true })) categoryId?: number) {
+    return this.menuService.getMenu(categoryId);
   }
 }
