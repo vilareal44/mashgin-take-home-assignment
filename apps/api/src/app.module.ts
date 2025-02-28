@@ -20,10 +20,10 @@ import { ServeStaticModule } from '@nestjs/serve-static';
         extensions: ['jpg'],
         cacheControl: true, // cache assets for improve performance on the browser
         maxAge: 3600000, // 1 hour in milliseconds
-      }
+      },
     }),
   ],
   controllers: [],
   providers: [PrismaService],
 })
-export class AppModule { }
+export class AppModule {}

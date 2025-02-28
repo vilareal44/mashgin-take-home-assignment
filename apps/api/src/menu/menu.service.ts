@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../shared/prisma.service';
 
 /**
- * Service for managing menu items 
+ * Service for managing menu items
  * Currently only used for the menu page, and will only retrieve items based on the categoryId
  */
 @Injectable()
 export class MenuService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   /**
    * Retrieves menu items based on the provided category ID
@@ -17,9 +17,11 @@ export class MenuService {
    */
   async getMenu(categoryId?: number) {
     return this.prisma.menuItem.findMany({
-      where: categoryId ? {
-        categoryId: categoryId,
-      } : {},
+      where: categoryId
+        ? {
+            categoryId: categoryId,
+          }
+        : {},
       include: {
         category: true,
       },

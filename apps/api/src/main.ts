@@ -4,7 +4,7 @@ import { Logger } from '@nestjs/common';
 
 /**
  * Bootstrap the NestJS application
- *  
+ *
  */
 async function bootstrap() {
   const port = process.env.PORT ?? 3001;

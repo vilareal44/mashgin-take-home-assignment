@@ -7,7 +7,7 @@ import { PrismaService } from 'src/shared/prisma.service';
  */
 @Injectable()
 export class CheckoutService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   /**
    * Creates a new checkout order
@@ -15,7 +15,15 @@ export class CheckoutService {
    * @returns A promise resolving to the created checkout order
    */
   async create(createCheckoutDto: CreateCheckoutDto) {
-    const { name, creditCardNumber, expirationDate, cvc, address, total, items } = createCheckoutDto;
+    const {
+      name,
+      creditCardNumber,
+      expirationDate,
+      cvc,
+      address,
+      total,
+      items,
+    } = createCheckoutDto;
 
     // convert MM/YY expirationDate to Date object (YYYY-MM-DD)
     const [month, shortYear] = expirationDate.split('/');
@@ -27,11 +35,11 @@ export class CheckoutService {
         total,
         items: {
           createMany: {
-            data: items.map(item => ({
+            data: items.map((item) => ({
               itemId: item.id,
               quantity: item.quantity,
-            }))
-          }
+            })),
+          },
         },
         payment: {
           create: {
@@ -41,10 +49,10 @@ export class CheckoutService {
             expirationDate: fullExpirationDate,
             cvc: parseInt(cvc),
             address,
-          }
-        }
-      }
-    })
+          },
+        },
+      },
+    });
     return order;
   }
 }

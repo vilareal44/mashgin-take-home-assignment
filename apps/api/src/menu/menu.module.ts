@@ -8,4 +8,4 @@ import { SharedModule } from 'src/shared/shared.module';
   controllers: [MenuController],
   providers: [MenuService],
 })
-export class MenuModule { }
+export class MenuModule {}

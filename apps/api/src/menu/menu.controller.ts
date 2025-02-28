@@ -6,7 +6,7 @@ import { MenuService } from './menu.service';
  */
 @Controller('menu')
 export class MenuController {
-  constructor(private readonly menuService: MenuService) { }
+  constructor(private readonly menuService: MenuService) {}
 
   /**
    * Retrieves the menu items based on the provided category ID
@@ -15,7 +15,10 @@ export class MenuController {
    * @returns A promise resolving to an array of menu items
    */
   @Get()
-  getMenu(@Query('categoryId', new ParseIntPipe({ optional: true })) categoryId?: number) {
+  getMenu(
+    @Query('categoryId', new ParseIntPipe({ optional: true }))
+    categoryId?: number,
+  ) {
     return this.menuService.getMenu(categoryId);
   }
 }
