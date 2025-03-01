@@ -9,10 +9,15 @@ interface MenuState {
   fetchMenuItems: (categoryId?: number) => Promise<void>;
 }
 
-export const useMenuStore = create<MenuState>((set) => ({
+const initialState = {
   menuItems: [],
   loading: false,
   error: null,
+};
+
+export const useMenuStore = create<MenuState>((set) => ({
+  ...initialState,
+
   fetchMenuItems: async (categoryId?: number) => {
     try {
       set({ loading: true, error: null });

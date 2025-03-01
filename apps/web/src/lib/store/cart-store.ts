@@ -1,9 +1,7 @@
-import { create } from 'zustand';
+import type { CartItem } from '@/types/cartItem';
 import type { MenuItem } from '@/types/menuItem';
 
-export interface CartItem extends MenuItem {
-  quantity: number;
-}
+import { create } from 'zustand';
 
 interface CartStore {
   items: CartItem[];
@@ -16,8 +14,12 @@ interface CartStore {
   getTotalItems: () => number;
 }
 
-export const useCartStore = create<CartStore>((set, get) => ({
+const initialState = {
   items: [],
+};
+
+export const useCartStore = create<CartStore>((set, get) => ({
+  ...initialState,
 
   addItem: (item: MenuItem) => {
     const { items } = get();
@@ -59,7 +61,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
     });
   },
 
-  clearCart: () => set({ items: [] }),
+  clearCart: () => set(initialState),
 
   getTotalPrice: () => {
     const { items } = get();

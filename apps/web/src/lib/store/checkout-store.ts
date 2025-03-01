@@ -5,9 +5,6 @@ interface CheckoutState {
   isSubmitting: boolean;
   error: string | null;
   paymentComplete: boolean;
-  setIsSubmitting: (isSubmitting: boolean) => void;
-  setError: (error: string | null) => void;
-  setPaymentComplete: (paymentComplete: boolean) => void;
   resetState: () => void;
   submitCheckout: (checkoutData: {
     name: string;
@@ -20,20 +17,16 @@ interface CheckoutState {
   }) => Promise<void>;
 }
 
-export const useCheckoutStore = create<CheckoutState>((set) => ({
+const initialState = {
   isSubmitting: false,
   error: null,
   paymentComplete: false,
+};
 
-  setIsSubmitting: (isSubmitting) => set({ isSubmitting }),
-  setError: (error) => set({ error }),
-  setPaymentComplete: (paymentComplete) => set({ paymentComplete }),
+export const useCheckoutStore = create<CheckoutState>((set) => ({
+  ...initialState,
 
-  resetState: () => set({
-    isSubmitting: false,
-    error: null,
-    paymentComplete: false,
-  }),
+  resetState: () => set(initialState),
 
   submitCheckout: async (checkoutData) => {
     try {
