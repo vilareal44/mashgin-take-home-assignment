@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import api from '@/src/lib/api';
+import api from '@/lib/api';
 
 interface CheckoutState {
   isSubmitting: boolean;

@@ -1,7 +1,7 @@
 "use client";
 
-import { MenuGrid } from "./menu-grid";
 import { Cart } from "./cart";
+import { MenuGrid } from "./menu-grid";
 
 export function MenuPage() {
   return (

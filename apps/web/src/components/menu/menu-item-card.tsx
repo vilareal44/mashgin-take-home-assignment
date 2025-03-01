@@ -1,11 +1,12 @@
 "use client";
 
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Button } from "@/src/components/ui/button";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/src/components/ui/card";
-import { Badge } from "@/src/components/ui/badge";
-import { MenuItem } from "@/src/lib/types";
-import { useCartStore } from "@/src/lib/store/cart-store";
+import { MenuItem } from "@/lib/types";
+import { useCartStore } from "@/lib/store/cart-store";
 
 interface MenuItemCardProps {
   item: MenuItem;

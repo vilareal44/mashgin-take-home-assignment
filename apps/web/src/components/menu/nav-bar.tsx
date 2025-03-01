@@ -1,8 +1,8 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { Badge } from "@/src/components/ui/badge";
-import { useCartStore } from "@/src/lib/store/cart-store";
+import { useCartStore } from "@/lib/store/cart-store";
 
 export function NavBar() {
   const { getTotalItems } = useCartStore();

@@ -1,12 +1,6 @@
 "use client";
 
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { IMaskInput } from "react-imask";
-import { useCartStore } from "@/src/lib/store/cart-store";
-import { useCheckoutStore } from "@/src/lib/store/checkout-store";
-import { Button } from "@/src/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Dialog,
   DialogContent,
@@ -14,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/src/components/ui/dialog";
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -22,10 +16,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/src/components/ui/form";
-import { Input } from "@/src/components/ui/input";
-import { Alert, AlertDescription } from "@/src/components/ui/alert";
+} from "@/components/ui/form";
+
 import { AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { IMaskInput } from "react-imask";
+import { Input } from "@/components/ui/input";
+import { useCartStore } from "@/lib/store/cart-store";
+import { useCheckoutStore } from "@/lib/store/checkout-store";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // Form schema for checkout dialog validation
 const formSchema = z.object({

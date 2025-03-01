@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/src/components/ui/button";
-import { Badge } from "@/src/components/ui/badge";
-import { useCartStore } from "@/src/lib/store/cart-store";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { CheckoutDialog } from "../checkout/checkout-dialog";
+import { useCartStore } from "@/lib/store/cart-store";
+import { useState } from "react";
 
 export function Cart() {
   const { items, getTotalPrice, getTotalItems, incrementQuantity, decrementQuantity, removeItem, clearCart } = useCartStore();

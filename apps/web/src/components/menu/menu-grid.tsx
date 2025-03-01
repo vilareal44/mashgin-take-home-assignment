@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
-import { MenuItemCard } from "./menu-item-card";
-import { useMenuStore } from "@/src/lib/store/menu-store";
+import { useCallback, useEffect } from "react";
+
 import { ErrorAlert } from "./error-alert";
+import { MenuItemCard } from "./menu-item-card";
+import { useMenuStore } from "@/lib/store/menu-store";
 
 export function MenuGrid() {
   const { menuItems, loading, error, fetchMenuItems } = useMenuStore();

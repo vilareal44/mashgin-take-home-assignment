@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { MenuItem } from './types';
+import type { MenuItem } from '@/types/menuItem';
+
 
 const API_HOST = process.env.NEXT_PUBLIC_API_HOST || 'http://localhost:3001';
 

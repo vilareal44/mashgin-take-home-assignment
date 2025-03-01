@@ -1,6 +1,6 @@
+import type { MenuItem } from '@/types/menuItem';
 import { create } from 'zustand';
-import { MenuItem } from '@/src/lib/types';
-import { fetchMenu } from '@/src/lib/api';
+import { fetchMenu } from '@/lib/api';
 
 interface MenuState {
   menuItems: MenuItem[];
