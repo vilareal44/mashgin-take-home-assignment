@@ -8,6 +8,11 @@ interface ErrorAlertProps {
   onRetry?: () => void;
 }
 
+/**
+ * Component to display error messages with an optional retry button
+ * @param message - The error message to display
+ * @param onRetry - Optional callback function to retry the operation
+ */
 export function ErrorAlert({ message, onRetry }: ErrorAlertProps) {
   return (
     <Alert variant="destructive" className="mb-4">

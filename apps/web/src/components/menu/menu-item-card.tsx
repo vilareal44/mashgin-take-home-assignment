@@ -12,6 +12,10 @@ interface MenuItemCardProps {
   item: MenuItem;
 }
 
+/**
+ * Card component that displays a menu item with image, price, and cart controls
+ * @param item - The menu item to display
+ */
 export function MenuItemCard({ item }: MenuItemCardProps) {
   const { addItem, items, incrementQuantity, decrementQuantity } = useCartStore();
   const cartItem = items.find((i) => i.id === item.id);

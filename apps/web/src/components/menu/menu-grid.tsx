@@ -6,6 +6,10 @@ import { ErrorAlert } from "./error-alert";
 import { MenuItemCard } from "./menu-item-card";
 import { useMenuStore } from "@/lib/store/menu-store";
 
+/**
+ * Component that displays a grid of menu items
+ * Fetches menu items from the store and handles loading/error states
+ */
 export function MenuGrid() {
   const { menuItems, loading, error, fetchMenuItems } = useMenuStore();
 

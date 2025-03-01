@@ -6,6 +6,10 @@ import { CheckoutDialog } from "../checkout/checkout-dialog";
 import { useCartStore } from "@/lib/store/cart-store";
 import { useState } from "react";
 
+/**
+ * Cart component that displays the user's selected items
+ * Allows user to modify quantity, remove items, and checkout
+ */
 export function Cart() {
   const { items, getTotalPrice, getTotalItems, incrementQuantity, decrementQuantity, removeItem, clearCart } = useCartStore();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
