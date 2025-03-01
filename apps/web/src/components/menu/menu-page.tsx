@@ -3,6 +3,9 @@
 import { Cart } from "./cart";
 import { MenuGrid } from "./menu-grid";
 
+/**
+ * Restaurant menu page component for menu grid and cart
+ */
 export function MenuPage() {
   return (
     <div className="container mx-auto py-8">
