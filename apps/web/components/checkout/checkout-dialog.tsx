@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IMaskInput } from "react-imask";
 import { useCartStore } from "@/lib/store/cart-store";
+import { useCheckoutStore } from "@/lib/store/checkout-store";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -24,6 +24,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 // Form schema for checkout dialog validation
 const formSchema = z.object({
@@ -53,7 +55,13 @@ interface CheckoutDialogProps {
 
 export function CheckoutDialog({ open, onOpenChange }: CheckoutDialogProps) {
   const { items, getTotalPrice, clearCart } = useCartStore();
-  const [paymentComplete, setPaymentComplete] = useState(false);
+  const {
+    isSubmitting,
+    error,
+    paymentComplete,
+    submitCheckout,
+    resetState
+  } = useCheckoutStore();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -66,21 +74,40 @@ export function CheckoutDialog({ open, onOpenChange }: CheckoutDialogProps) {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log("Payment data:", data);
-    setPaymentComplete(true);
+  const onSubmit = async (data: FormValues) => {
+    // Format the data for the API
+    const checkoutData = {
+      name: data.name,
+      creditCardNumber: data.cardNumber.replace(/\s/g, ''),
+      expirationDate: data.expiryDate,
+      cvc: data.cvc,
+      address: data.address,
+      total: getTotalPrice(),
+      items: items.map(item => ({
+        id: item.id,
+        quantity: item.quantity
+      }))
+    };
 
-    setTimeout(() => {
-      form.reset();
-      setPaymentComplete(false);
-      clearCart();
-      onOpenChange(false);
-    }, 3000);
+    try {
+      await submitCheckout(checkoutData);
+
+      // Set a timeout to reset the form and close the dialog
+      setTimeout(() => {
+        form.reset();
+        resetState();
+        clearCart();
+        onOpenChange(false);
+      }, 3000);
+    } catch {
+      // Error is already handled in the store
+    }
   };
 
   const handleOpenChange = (isOpen: boolean) => {
     if (!isOpen) {
       form.reset();
+      resetState();
     }
     onOpenChange(isOpen);
   };
@@ -103,6 +130,13 @@ export function CheckoutDialog({ open, onOpenChange }: CheckoutDialogProps) {
                 Note: This is a mock payment. Provide any card details.
               </DialogDescription>
             </DialogHeader>
+
+            {error && (
+              <Alert variant="destructive" className="mb-4">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
 
             <div className="border rounded-md p-4 mb-4">
               <h3 className="font-medium mb-2">Order Summary</h3>
@@ -236,8 +270,8 @@ export function CheckoutDialog({ open, onOpenChange }: CheckoutDialogProps) {
                 />
 
                 <DialogFooter>
-                  <Button type="submit" className="w-full">
-                    Pay ${getTotalPrice().toFixed(2)}
+                  <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? "Processing..." : `Pay $${getTotalPrice().toFixed(2)}`}
                   </Button>
                 </DialogFooter>
               </form>
