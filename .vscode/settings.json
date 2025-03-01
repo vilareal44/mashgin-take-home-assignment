@@ -9,5 +9,11 @@
     "web"
   ],
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "search.exclude": {
+    "**/.next": true,
+    "**/.turbo": true,
+    "**/tmp": true,
+    "**/dist": true,
+  },
 }
