@@ -5,7 +5,7 @@ import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { MenuItem } from "@/lib/types";
+import type { MenuItem } from "@/types/menuItem";
 import { useCartStore } from "@/lib/store/cart-store";
 
 interface MenuItemCardProps {
