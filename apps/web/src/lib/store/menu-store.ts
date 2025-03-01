@@ -1,4 +1,4 @@
-import type { MenuItem } from '@/types/menuItem';
+import type { MenuItem } from '@/types/menu-item';
 import { create } from 'zustand';
 import { fetchMenu } from '@/lib/api';
 

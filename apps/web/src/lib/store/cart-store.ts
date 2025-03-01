@@ -1,5 +1,5 @@
-import type { CartItem } from '@/types/cartItem';
-import type { MenuItem } from '@/types/menuItem';
+import type { CartItem } from '@/types/cart-item';
+import type { MenuItem } from '@/types/menu-item';
 
 import { create } from 'zustand';
 

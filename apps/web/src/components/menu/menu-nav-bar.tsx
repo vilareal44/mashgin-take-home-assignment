@@ -7,7 +7,7 @@ import { useCartStore } from "@/lib/store/cart-store";
 /**
  * Navigation bar component shown at the too
  */
-export function NavBar() {
+export function MenuNavBar() {
   const { getTotalItems } = useCartStore();
   const totalItems = getTotalItems();
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Cart } from "./cart";
+import { Cart } from "@/components/cart/cart";
 import { MenuGrid } from "./menu-grid";
 
 /**
