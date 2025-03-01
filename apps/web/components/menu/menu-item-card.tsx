@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MenuItem } from "@/lib/data/menu-items";
+import { MenuItem } from "@/lib/types";
 import { useCartStore } from "@/lib/store/cart-store";
 
 interface MenuItemCardProps {
@@ -24,7 +24,7 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
     <Card className="overflow-hidden">
       <div className="relative h-48 w-full bg-slate-200">
         <Image
-          src={item.image}
+          src={`${process.env.NEXT_PUBLIC_API_HOST}/assets/${item.imageId}.jpg`}
           alt={item.name}
           fill
           className="object-contain"
