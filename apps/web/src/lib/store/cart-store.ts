@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { MenuItem } from '@/lib/types';
+import { MenuItem } from '@/src/lib/types';
 
 export interface CartItem extends MenuItem {
   quantity: number;

@@ -2,7 +2,7 @@
 
 import { useEffect, useCallback } from "react";
 import { MenuItemCard } from "./menu-item-card";
-import { useMenuStore } from "@/lib/store/menu-store";
+import { useMenuStore } from "@/src/lib/store/menu-store";
 import { ErrorAlert } from "./error-alert";
 
 export function MenuGrid() {

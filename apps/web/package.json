@@ -8,6 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
+    "lint:fix": "next lint --fix",
+    "format:imports": "eslint --fix \"**/*.{js,jsx,ts,tsx}\" --rule \"import/order: error\"",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {

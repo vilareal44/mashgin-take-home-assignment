@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useCartStore } from "@/lib/store/cart-store";
+import { Button } from "@/src/components/ui/button";
+import { Badge } from "@/src/components/ui/badge";
+import { useCartStore } from "@/src/lib/store/cart-store";
 import { CheckoutDialog } from "../checkout/checkout-dialog";
 
 export function Cart() {
