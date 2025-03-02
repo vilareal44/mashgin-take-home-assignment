@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { MenuItem } from '@/types/menu-item';
-
+import type { CheckoutData } from '@/types/checkout-data';
 
 const API_HOST = process.env.NEXT_PUBLIC_API_HOST || 'http://localhost:3001';
 
@@ -16,7 +16,7 @@ const api = axios.create({
  * @param categoryId - [optional] The ID of the category to filter the menu items by
  * @returns A promise resolving to an array of menu items
  */
-export const fetchMenu = async (categoryId?: number): Promise<MenuItem[]> => {
+const fetchMenu = async (categoryId?: number): Promise<MenuItem[]> => {
   try {
     const params = categoryId ? { categoryId } : {};
     const response = await api.get<MenuItem[]>('/menu', { params });
@@ -27,4 +27,21 @@ export const fetchMenu = async (categoryId?: number): Promise<MenuItem[]> => {
   }
 };
 
-export default api; 
+/**
+ * Handles the checkout process
+ * @param checkoutData - The checkout data to be processed
+ * @returns A promise resolving to void
+ */
+const checkout = async (checkoutData: CheckoutData): Promise<void> => {
+  try {
+    await api.post<CheckoutData>('/checkout', checkoutData);
+  } catch (error) {
+    console.error('Error during checkout:', error);
+    throw error;
+  }
+};
+
+/**
+ * Exports only the API functions
+ */
+export { fetchMenu, checkout };
