@@ -1,7 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { CheckoutDialog } from "@/components/checkout/checkout-dialog";
 import { useCartStore } from "@/lib/store/cart-store";
 import { useState } from "react";

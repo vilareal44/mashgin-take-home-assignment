@@ -27,6 +27,8 @@ import { useCheckoutStore } from "@/lib/store/checkout-store";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CheckoutData } from "@/types/checkout-data";
+import { CartItem } from "@/types/cart-item";
 
 // Form schema for checkout dialog validation
 const formSchema = z.object({
@@ -77,7 +79,7 @@ export function CheckoutDialog({ open, onOpenChange }: CheckoutDialogProps) {
 
   const onSubmit = async (data: FormValues) => {
     // Format the data for the API
-    const checkoutData = {
+    const checkoutData: CheckoutData = {
       name: data.name,
       creditCardNumber: data.cardNumber.replace(/\s/g, ''),
       expirationDate: data.expiryDate,
@@ -87,7 +89,7 @@ export function CheckoutDialog({ open, onOpenChange }: CheckoutDialogProps) {
       items: items.map(item => ({
         id: item.id,
         quantity: item.quantity
-      }))
+      } as CartItem))
     };
 
     try {
