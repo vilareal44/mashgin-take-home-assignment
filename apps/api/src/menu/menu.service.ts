@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../core/prisma.service';
-import { MenuItem, MenuCategory } from '@prisma/client';
 import { MenuDto } from './dto/menu.dto';
 import { MenuItemRepository } from './menu.repository';
 
