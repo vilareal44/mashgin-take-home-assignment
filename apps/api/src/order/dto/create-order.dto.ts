@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 /**
- * Checkout DTO schema for validation using Zod
+ * Create Order DTO schema for validation using Zod
  */
-export const createCheckoutSchema = z
+export const createOrderSchema = z
   .object({
     name: z.string().min(1, 'Name is required'),
     creditCardNumber: z.string().min(1, 'Credit card number is required'),
@@ -29,6 +29,6 @@ export const createCheckoutSchema = z
   .required();
 
 /**
- * Checkout DTO type
+ * Create Order DTO type
  */
-export type CreateCheckoutDto = z.infer<typeof createCheckoutSchema>;
+export type CreateOrderDto = z.infer<typeof createOrderSchema>;

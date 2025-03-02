@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MenuModule } from './menu/menu.module';
-import { CheckoutModule } from './checkout/checkout.module';
+import { OrderModule } from './order/order.module';
 import { CoreModule } from './core/core.module';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -13,7 +13,7 @@ import { PrismaService } from './core/prisma.service';
   imports: [
     CoreModule,
     MenuModule,
-    CheckoutModule,
+    OrderModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'assets'),
       serveRoot: '/assets',
