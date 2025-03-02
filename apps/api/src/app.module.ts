@@ -1,14 +1,17 @@
 import { Module } from '@nestjs/common';
-import { SharedModule } from './shared/shared.module';
-import { PrismaService } from './shared/prisma.service';
 import { MenuModule } from './menu/menu.module';
 import { CheckoutModule } from './checkout/checkout.module';
+import { CoreModule } from './core/core.module';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { PrismaService } from './core/prisma.service';
 
+/**
+ * Main application module that imports all other modules
+ */
 @Module({
   imports: [
-    SharedModule,
+    CoreModule,
     MenuModule,
     CheckoutModule,
     ServeStaticModule.forRoot({

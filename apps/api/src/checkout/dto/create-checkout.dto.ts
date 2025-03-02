@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 /**
- * Checkout DTO schema for validation
+ * Checkout DTO schema for validation using Zod
  */
 export const createCheckoutSchema = z
   .object({

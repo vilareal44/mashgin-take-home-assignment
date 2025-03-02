@@ -4,7 +4,7 @@ import {
   CreateCheckoutDto,
   createCheckoutSchema,
 } from './dto/create-checkout.dto';
-import { ZodValidationPipe } from '../zod-validation-pipe';
+import { ZodValidationPipe } from 'src/core/pipes/zod-validation.pipe';
 
 /**
  * Controller for managing checkout operations

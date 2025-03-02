@@ -1,5 +1,7 @@
-import { Controller, Get, Query, ParseIntPipe } from '@nestjs/common';
-import { MenuService } from './menu.service';
+import { Controller, Get, Query, UsePipes } from '@nestjs/common';
+import { MenuService, MenuItemWithCategory } from './menu.service';
+import { GetMenuQueryDto, GetMenuQuerySchema } from './models';
+import { ZodValidationPipe } from '../core/pipes/zod-validation.pipe';
 
 /**
  * Controller for managing menu items
@@ -10,15 +12,12 @@ export class MenuController {
 
   /**
    * Retrieves the menu items based on the provided category ID
-   * @param categoryId - The ID of the category to filter the menu items by
-   * if no categoryId is provided, all menu items are returned
-   * @returns A promise resolving to an array of menu items
+   * @param query - The query parameters for filtering menu items
+   * @returns A promise resolving to an array of menu items with their categories
    */
   @Get()
-  getMenu(
-    @Query('categoryId', new ParseIntPipe({ optional: true }))
-    categoryId?: number,
-  ) {
-    return this.menuService.getMenu(categoryId);
+  @UsePipes(new ZodValidationPipe(GetMenuQuerySchema))
+  getMenu(@Query() query: GetMenuQueryDto): Promise<MenuItemWithCategory[]> {
+    return this.menuService.getMenu(query.categoryId);
   }
 }

@@ -1,5 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../shared/prisma.service';
+import { PrismaService } from '../core/prisma.service';
+import { MenuItem, MenuCategory } from '@prisma/client';
+
+export type MenuItemWithCategory = MenuItem & {
+  category: MenuCategory;
+};
 
 /**
  * Service for managing menu items
@@ -13,14 +18,14 @@ export class MenuService {
    * Retrieves menu items based on the provided category ID
    * @param categoryId - The ID of the category to filter the menu items by
    * if no categoryId is provided, all menu items are returned
-   * @returns A promise resolving to an array of menu items
+   * @returns A promise resolving to an array of menu items with their categories
    */
-  async getMenu(categoryId?: number) {
+  async getMenu(categoryId?: number): Promise<MenuItemWithCategory[]> {
     return this.prisma.menuItem.findMany({
       where: categoryId
         ? {
-            categoryId: categoryId,
-          }
+          categoryId: categoryId,
+        }
         : {},
       include: {
         category: true,
