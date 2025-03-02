@@ -16,8 +16,8 @@ export class MenuItemRepository {
 
   /**
    * Retrieves menu items from the database based on the provided category ID.
-   * @param categoryId - optional - The ID of the category to filter the menu items by.
-   * @returns A promise resolving to an array of MenuDto.
+   * @param {number?} categoryId - optional - The ID of the category to filter the menu items by.
+   * @returns {Promise<MenuDto[]>} A promise resolving to an array of MenuDto.
    */
   async getMenu(categoryId?: number): Promise<MenuDto[]> {
     const menuItemsWithCategory: MenuItemWithCategoryRaw[] = await this.prisma.menuItem.findMany({

@@ -12,9 +12,9 @@ export class MenuController {
   constructor(private readonly menuService: MenuService) {}
 
   /**
-   * Retrieves the menu items based on the provided category ID
-   * @param query - The query parameters for filtering menu items
-   * @returns A promise resolving to an array of MenuDto
+   * Retrieves the menu items based on the provided optional categoryId
+   * @param {GetMenuQueryDto} query - The query parameters for filtering menu items (currently only categoryId)
+   * @returns {Promise<MenuDto[]>} A promise resolving to an array of MenuDto
    */
   @Get()
   @UsePipes(new ZodValidationPipe(GetMenuQuerySchema))
