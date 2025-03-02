@@ -2,17 +2,17 @@
 CREATE TABLE "menu_categories" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "imageId" TEXT NOT NULL,
-    "name" TEXT
+    "name" TEXT NOT NULL
 );
 
 -- CreateTable
-CREATE TABLE "items" (
+CREATE TABLE "menu_items" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "imageId" TEXT NOT NULL,
-    "name" TEXT,
+    "name" TEXT NOT NULL,
     "price" REAL NOT NULL,
     "categoryId" INTEGER NOT NULL,
-    CONSTRAINT "items_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "menu_categories" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "menu_items_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "menu_categories" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -30,7 +30,7 @@ CREATE TABLE "order_items" (
 
     PRIMARY KEY ("orderId", "itemId"),
     CONSTRAINT "order_items_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "orders" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "order_items_itemId_fkey" FOREIGN KEY ("itemId") REFERENCES "items" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "order_items_itemId_fkey" FOREIGN KEY ("itemId") REFERENCES "menu_items" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -39,6 +39,7 @@ CREATE TABLE "order_payments" (
     "orderId" INTEGER NOT NULL,
     "amount" REAL NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'COMPLETED',
+    "name" TEXT,
     "creditCardNumber" TEXT NOT NULL,
     "expirationDate" DATETIME NOT NULL,
     "cvc" INTEGER NOT NULL,
@@ -50,7 +51,7 @@ CREATE TABLE "order_payments" (
 CREATE UNIQUE INDEX "menu_categories_name_key" ON "menu_categories"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "items_name_key" ON "items"("name");
+CREATE UNIQUE INDEX "menu_items_name_key" ON "menu_items"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "order_payments_orderId_key" ON "order_payments"("orderId");

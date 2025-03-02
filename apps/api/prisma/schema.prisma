@@ -22,9 +22,9 @@ enum PaymentStatus {
 
 /// Represents a category of items in the menu
 model MenuCategory {
-  id      Int     @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   imageId String
-  name    String? @unique
+  name    String @unique
 
   items MenuItem[]
 
@@ -35,14 +35,14 @@ model MenuCategory {
 model MenuItem {
   id         Int          @id @default(autoincrement())
   imageId    String
-  name       String?      @unique
+  name       String       @unique
   price      Float
   categoryId Int
   category   MenuCategory @relation(fields: [categoryId], references: [id])
 
   orders OrderItem[]
 
-  @@map("items")
+  @@map("menu_items")
 }
 
 /// Represents an order
