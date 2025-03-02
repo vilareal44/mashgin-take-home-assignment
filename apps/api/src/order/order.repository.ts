@@ -4,6 +4,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { OrderDto } from './dto/order.dto';
 import { Order } from '@prisma/client';
 import { parseExpirationDate } from '../utils/date.utils';
+import { OrderDtoMapper } from './dto/mappers/order-dto.mapper';
 
 /**
  * Repository for managing order operations
@@ -53,17 +54,6 @@ export class OrderRepository {
         },
       },
     });
-    return this.mapToDto(order);
-  }
-
-  // mapper to convert the db entity to the DTO
-  private mapToDto(order: Order): OrderDto {
-    const { id, total, createdAt } = order;
-
-    return {
-      id,
-      total,
-      createdAt,
-    } as OrderDto;
+    return OrderDtoMapper.mapToDto(order);
   }
 }

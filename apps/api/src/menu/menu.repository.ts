@@ -1,11 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../core/prisma.service';
-import { MenuItem, MenuCategory } from '@prisma/client';
 import { MenuDto } from './dto/menu.dto';
-
-type MenuItemWithCategoryRaw = MenuItem & {
-  category: MenuCategory;
-};
+import { MenuDtoMapper, type MenuItemWithCategoryRaw } from './dto/mappers/menu-dto-mapper';
 
 /**
  * Repository for retrieving menu items from the database using Prisma client.
@@ -47,24 +43,6 @@ export class MenuItemRepository {
       },
     });
 
-    return menuItemsWithCategory.map(this.mapToDto);
-  }
-
-  // mapper to convert the raw db data to the DTO
-  private mapToDto(menuItemWithCategory: MenuItemWithCategoryRaw): MenuDto {
-    const { id, name, imageId, price, category } = menuItemWithCategory;
-    const { id: categoryId, name: categoryName, imageId: categoryImageId } = category;
-
-    return {
-      id,
-      name,
-      imageId,
-      price,
-      category: {
-        id: categoryId,
-        name: categoryName,
-        imageId: categoryImageId,
-      },
-    } as MenuDto;
+    return menuItemsWithCategory.map(MenuDtoMapper.mapToDto);
   }
 }
