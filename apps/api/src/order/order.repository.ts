@@ -1,8 +1,9 @@
+import { PrismaService } from '../core/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { PrismaService } from 'src/core/prisma.service';
 import { OrderDto } from './dto/order.dto';
 import { Order } from '@prisma/client';
+import { parseExpirationDate } from '../utils/date.utils';
 
 /**
  * Repository for managing order operations
@@ -27,7 +28,7 @@ export class OrderRepository {
       items,
     } = createOrderDto;
 
-    const fullExpirationDate = this.parseExpirationDate(expirationDate);
+    const fullExpirationDate = parseExpirationDate(expirationDate);
 
     const order = await this.prisma.order.create({
       data: {
@@ -53,17 +54,6 @@ export class OrderRepository {
       },
     });
     return this.mapToDto(order);
-  }
-
-  /**
-   * Parses the expiration date from MM/YY format to a Date object
-   * @param {string} expirationDate - The expiration date in MM/YY format
-   * @returns {Date} The parsed expiration date
-   */
-  private parseExpirationDate(expirationDate: string) {
-    const [month, shortYear] = expirationDate.split('/');
-    const year = 2000 + parseInt(shortYear);
-    return new Date(year, parseInt(month) - 1, 1);
   }
 
   // mapper to convert the db entity to the DTO
