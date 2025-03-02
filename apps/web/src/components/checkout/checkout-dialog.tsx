@@ -63,7 +63,8 @@ export function CheckoutDialog({ open, onOpenChange }: CheckoutDialogProps) {
     error,
     paymentComplete,
     submitCheckout,
-    resetState
+    resetState,
+    orderId
   } = useCheckoutStore();
 
   const form = useForm<FormValues>({
@@ -122,6 +123,9 @@ export function CheckoutDialog({ open, onOpenChange }: CheckoutDialogProps) {
           <div className="py-12 text-center">
             <h2 className="text-2xl font-semibold text-green-600 mb-2">Payment Successful!</h2>
             <p className="text-muted-foreground">Your order was submitted.</p>
+            {orderId && (
+              <p className="mt-2 font-medium">Order ID: {orderId}</p>
+            )}
           </div>
         ) : (
           <>

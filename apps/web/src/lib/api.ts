@@ -30,11 +30,12 @@ const fetchMenu = async (categoryId?: number): Promise<MenuItem[]> => {
 /**
  * Handles the checkout process
  * @param checkoutData - The checkout data to be processed
- * @returns A promise resolving to void
+ * @returns A promise resolving to the order ID
  */
-const checkout = async (checkoutData: CheckoutData): Promise<void> => {
+const checkout = async (checkoutData: CheckoutData): Promise<{ id: string }> => {
   try {
-    await api.post<CheckoutData>('/checkout', checkoutData);
+    const response = await api.post('/order', checkoutData);
+    return response.data;
   } catch (error) {
     console.error('Error during checkout:', error);
     throw error;
