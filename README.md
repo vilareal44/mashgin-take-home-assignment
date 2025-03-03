@@ -4,11 +4,14 @@
 
 This repository contains a monorepo built with Turborepo, housing a full-stack application with a Next.js frontend and a NestJS backend. The project demonstrates modern software development practices using a TypeScript-based tech stack.
 
+![Mashgin Menu Interface](./resources/mashgin-menu.png)
+
+
 
 - [Project Structure](#project-structure)
 - [Architecture](#architecture)
-  - [Projects](#projects)
   - [Architectural Decisions](#architectural-decisions)
+  - [Projects](#projects)
 - [Getting Started](#getting-started)
 - [Database](#database)
 - [Next Steps](#next-steps)
@@ -19,7 +22,7 @@ This repository contains a monorepo built with Turborepo, housing a full-stack a
 ```
 .
 ├── apps/                   
-│   ├── api/                # NestJS backend application
+│   ├── api/                # NestJS backend service
 │   └── web/                # Next.js frontend application
 └── packages/               # Shared libraries and configurations
     ├── eslint-config/      
@@ -45,9 +48,14 @@ For a detailed explanation of the key architectural and tech stack decisions mad
 
 ## Getting Started
 
+### Prerequisites
+
+- Node.js >= 18.18.0
+- Pnpm package manager
+
 Follow these steps to set up and run the project:
 
-1. Copy the environment variables file:
+1. Copy the environment variables file for the backend service:
    ```bash
    cp apps/api/.env.example apps/api/.env
    ```
@@ -69,10 +77,13 @@ Follow these steps to set up and run the project:
    ```bash
    pnpm dev
    ```
+5. Make sure both tasks are running (web#dev and api#dev), then go to `http://localhost:3000`
 
 ## Database
 
 The backend uses SQLite for simplicity in this demonstration project. In a real-world production environment, a more robust relational database management system like PostgreSQL or MySQL would be a more appropriate choice for scalability, concurrency, and reliability.
+
+SQLite db file will be created at: `apps/api/prisma/mashgin-dev.db`
 
 ## Next Steps
 

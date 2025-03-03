@@ -44,15 +44,15 @@ The service uses SQLite as the database for development and demonstration purpos
 
 ### Entity Relationship Diagram
 
-![Entity Relationship Diagram](../../resources/ER_DIAGRAM.png)
+![Entity Relationship Diagram](../../resources/er-diagram.png)
 
 ## API Endpoints
 
-The API provides the following endpoints: 
-
-- `/menu` - [GET] Retrieves menu items and their respective categories.
-- `/order` - [POST] Creates an order with payment information.
-- `/assets/[image-id].[extension]` - [GET] Serves static images for menu items and categories.
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/menu` | GET | Retrieves menu items and their respective categories. |
+| `/order` | POST | Creates an order with payment information. |
+| `/assets/[image-id].[extension]` | GET | Serves static images for menu items and categories. |
 
 Full API documentation is available at `/api/docs` when the service is running.
 
