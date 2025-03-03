@@ -36,7 +36,9 @@ For the frontend, I decided to go with NextJS, Tailwind CSS and Shadcn component
 
 ## Code Organization
 
-For organizing my code, I chose to structure everything by feature instead of by technical layer. The folder structure naturally reflects the application's functionality, and makes it really easy to maintain on small projects like this.
+For organizing my code, I chose to structure everything by feature instead of by technical layer. The folder structure naturally reflects the application's functionality, and makes it really easy to maintain on small projects like this. 
+
+I also considered implementing clean architecture for the backend code, with clear separation of concerns between domain, application, and infrastructure layers. However, I decided this would be overkill for such a small project and would have added unnecessary complexity.
 
 ## API Design
 
