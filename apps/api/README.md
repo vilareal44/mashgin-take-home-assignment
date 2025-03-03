@@ -1,6 +1,6 @@
 # API Service
 
-The API service is built using NestJS, a progressive Node.js framework for building efficient and scalable server-side applications. It provides a RESTful API for the web frontend to interact with, handling business logic and data persistence.
+The API service is built using NestJS. It provides a REST API for the web frontend to interact with, handling business logic and data persistence.
 
 - [Directory Structure](#directory-structure)
 - [Technical Stack](#technical-stack)
@@ -20,7 +20,7 @@ The API service is built using NestJS, a progressive Node.js framework for build
 │   ├── migrations/        # Database migration files
 │   ├── schema.prisma      # Prisma schema definition
 │   └── seed.ts            # Database seeding script
-└── src/                   # Source code
+└── src/                   
     ├── core/              # Core functionality and shared code
     ├── menu/              # Menu feature module
     ├── order/             # Order feature module
@@ -60,26 +60,12 @@ Full API documentation is available at `/api/docs` when the service is running.
 
 ### Prerequisites
 
-- Node.js (version specified in package.json)
+- Node.js >= 18.18.0
 - pnpm package manager
-- Access to the root repository
 
 ### Setup
 
-1. From the root of the monorepo, install dependencies:
-   ```bash
-   pnpm install
-   ```
-
-2. Copy the environment variables file:
-   ```bash
-   cp .env.example .env
-   ```
-
-3. Prepare the database:
-   ```bash
-   pnpm db:prepare
-   ```
+For setup instructions, see the root [README.md](../../README.md) file.
 
 ### Running the Service
 To run this service as a standalone, use the commands bellow.

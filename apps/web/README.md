@@ -39,15 +39,18 @@ This is a Next.js-based web application that serves as the frontend for the Mash
 
 - pnpm package manager
 
+### Setup
+
+For setup instructions, see the root [README.md](../../README.md) file.
 
 ### Environment Variables
 
 The application uses environment variables for configuration. These are typically defined in `.env.development` for development and `.env` for production.
 
 Key variables include:
-- `NEXT_PUBLIC_API_URL`: The URL of the API service
+- `NEXT_PUBLIC_API_HOST`: The URL of the API service
 
-Example of this file can be found in `.env.example`.
+For local developent, `.env.local` file is used.
 
 ## Testing
 
