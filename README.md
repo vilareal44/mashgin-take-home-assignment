@@ -53,6 +53,8 @@ For a detailed explanation of the key architectural and tech stack decisions mad
 - Node.js >= 18.18.0
 - Pnpm package manager
 
+### Setup
+
 Follow these steps to set up and run the project:
 
 1. Copy the environment variables file for the backend service:
