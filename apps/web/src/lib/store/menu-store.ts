@@ -2,13 +2,25 @@ import type { MenuItem } from '@/types/menu-item';
 import { create } from 'zustand';
 import { fetchMenu } from '@/lib/api';
 
+/**
+ * Interface representing the state and actions for the menu items
+ */
 interface MenuState {
   menuItems: MenuItem[];
   loading: boolean;
   error: string | null;
+
+  /** 
+   * Fetches menu items from the API
+   * @param {number} categoryId - Optional category ID to filter menu items
+   * @returns {Promise<void>} Promise that resolves when menu items are fetched
+   */
   fetchMenuItems: (categoryId?: number) => Promise<void>;
 }
 
+/*
+ * Initial state for the menu store 
+ */
 const initialState = {
   menuItems: [],
   loading: false,

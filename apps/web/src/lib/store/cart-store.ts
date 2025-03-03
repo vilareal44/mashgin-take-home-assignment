@@ -3,14 +3,50 @@ import type { MenuItem } from '@/types/menu-item';
 
 import { create } from 'zustand';
 
+/**
+ * Interface representing the shopping cart state and actions
+ */
 interface CartStore {
   items: CartItem[];
+
+  /** 
+   * Adds a menu item to the cart
+   * @param {MenuItem} item - The menu item to add to the cart
+   */
   addItem: (item: MenuItem) => void;
+
+  /** 
+   * Removes an item from the cart
+   * @param {number} itemId - The ID of the item to remove
+   */
   removeItem: (itemId: number) => void;
+
+  /** 
+   * Increases the quantity of an item in the cart by 1
+   * @param {number} itemId - The ID of the item to increment
+   */
   incrementQuantity: (itemId: number) => void;
+
+  /** 
+   * Decreases the quantity of an item in the cart by 1
+   * If quantity becomes 0, the item is removed from the cart
+   * @param {number} itemId - The ID of the item to decrement
+   */
   decrementQuantity: (itemId: number) => void;
+
+  /** Removes all items from the cart */
   clearCart: () => void;
+
+  /** 
+   * Calculates the total price of all items in the cart
+   * @returns {number} The total price
+   */
   getTotalPrice: () => number;
+
+  /** 
+   * Calculates the total number of items in the cart
+   * @returns {number} The total quantity of all items
+   */
   getTotalItems: () => number;
 }
 
