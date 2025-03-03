@@ -12,45 +12,42 @@
 
 ## Overview
 
-In this document, I'm breaking down the key architectural and tech stack choices I made for this project and why I made them. I primarily focused on meeting the assignment requirements (specially focusing on simplicity), but I also kept in mind best practices for creating code (e.g. maintainability, performance, dev experience,...). These decisions guided how I structured the entire project. 
-
-I believe there is much more that could be done from the system design perspective if this project goes to production. We can discuss my thoughts on it if you'd like.
+This document explains the key architectural and tech stack choices made for this project. I focused on meeting the assignment requirements with simplicity while maintaining code quality, maintainability, and developer experience.
 
 ## Monorepo Structure
 
-For this project, I went with a monorepo setup using Turborepo and pnpm because it just made sense for delivering both frontend and backend code together. Turborepo gives me some nice perks like faster builds through caching and better task management across packages. While I'm not sharing much code between projects right now, the monorepo makes it easy to do so when/if needed. It also keeps dependency management clean and ensures I'm using the same tools consistently throughout the codebase. I chose pnpm over npm (or yarn) mainly because it's faster and doesn't take much disk space.
+I used a Turborepo monorepo setup with pnpm to deliver frontend and backend code together. This provides faster builds through caching, better task management, and consistent tooling across the codebase. Though there isn't much shared code now, this structure makes it easy to add when needed.
 
 ## Tech Stack
 
 ### Database
 
-I went with SQLite for this project because it's simpler than more robust options like MySQL or PostgreSQL. It does everything needed for this project without extra complexity. The nice thing is I'm using Prisma as a layer between my code and the database, so this could be easily switched to MySQL or something else later if needed. SQLite works perfectly for now, but for a real production app where lots of users are hitting the database at the same time and you need more advanced features, I'd definitely upgrade to MySQL or Postgres instead (or evalute other database solutions)
+I chose SQLite because it meets the needs without unnecessary complexity. Using Prisma as an ORM means we can easily switch to MySQL or PostgreSQL later if needed. For a production app with higher concurrency needs, I would upgrade to a more robust database.
 
 ### Backend
 
-I picked NestJS for my backend because it gives me a simple and organized way to build API services, and it works great with TypeScript. It also has built-in dependency injection, which makes testing easier. Plus, its module system keeps the code neat and organized.
+NestJS provides a structured way to build API services with TypeScript. Its dependency injection system makes testing easier, and its module system keeps code organized.
 
 #### Images
-I decided to serve menu item images through a `/assets` route on the api. This is probably not ideal. I can think of a few solution would be better, like:
-- host images on a proper image hosting and optimization service (e.g. kraken.io)
-- upload images to storage service (e.g aws S3) and serve them through a CDN service (e.g aws cloudfront)
-- use NextJS next/image component.
-  - Note: This project uses the next/image component, which requires Next.js API capabilities. However, I believe it could be deployed as a static application without Next.js APIs, simplifying the setup and reducing infrastructure overhead. I decide to use it only for showcasing and development purposes.
+I serve menu item images through an `/assets` route on the API. Better alternatives for production would be:
+- Using an image hosting/optimization service
+- Storing images in a service like AWS S3 and serving through a CDN
+- Using NextJS built-in image optimization (requires NextJS API feature)
 
 ### Frontend
 
-For the frontend, I decided to go with NextJS, Tailwind CSS and Shadcn components. This combination gives me a solid starting point with built-in TypeScript on NextJS.  When it came to state management, I thought about using Redux with Redux-Toolkit, but ultimately chose Zustand instead because it's less complex and requires less boilerplate code while still meeting all my needs for this project.
+The frontend uses NextJS, Tailwind CSS, and Shadcn components with TypeScript support. For state management, I chose Zustand over Redux as it requires less boilerplate while meeting all project needs.
 
 ## Code Organization
 
-For organizing my code, I chose to structure everything by feature instead of by technical layer. The folder structure naturally reflects the application's functionality, and makes it really easy to maintain on small projects like this. 
+I organized code by feature rather than technical layer, making the structure reflect application functionality. This approach works well for smaller projects like this one.
 
-I also considered implementing clean architecture for the backend code, with clear separation of concerns between domain, application, and infrastructure layers. However, I decided this would be overkill for such a small project and would have added unnecessary complexity.
+A clean architecture implementation with domain, application, and infrastructure layers was considered but deemed unnecessary for this project size.
 
 ## API Design
 
-For the API design, I went with a REST approach, with standard methods and status codes. The resource-oriented structure maps nicely to database entities, creating a clear relationship between the data and the endpoints. To make the API easier to explore and test, I added Swagger documentation where you can see endpoints and try them out.
+The API follows REST principles with standard methods and status codes. Its resource-oriented structure aligns with database entities. Swagger documentation is included for easier exploration and testing.
 
 ## Testing Strategy
 
-Although testing wasn't specifically required for this take-home assignment, I still implemented unit tests for the core features in the backend. For a more comprehensive testing approach, I'd add integration tests, as well as component tests for the frontend to make sure the UI behaves properly. These additional testing layers would be my next steps if I were to continue developing this application for production use.
+I included unit tests for core backend features. In a production scenario, I would add integration tests and frontend component tests to ensure full application reliability.
