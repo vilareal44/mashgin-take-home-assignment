@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# Web Application
+This is a Next.js-based web application that serves as the frontend for the Mashgin take-home assignment. It provides a user interface for interacting with the API service, displaying menu items and managing orders.
 
-## Getting Started
 
-First, run the development server:
+- [Directory Structure](#directory-structure)
+- [Technical Stack](#technical-stack)
+- [Development](#development)
+- [Testing](#testing)
+- [Deployment](#deployment)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+
+## Directory Structure
+
+```
+.
+├── public/                # Static files served directly by Next.js
+│   └── ...                
+└── src/                   # Source code
+    ├── app/               # Next.js App Router components and pages
+    ├── components/        # Reusable UI components
+    ├── lib/               # Utility functions and client-side libraries
+    └── types/             # TypeScript type definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technical Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js
+- **Language**: TypeScript
+- **UI/Styling**: Tailwind CSS and Shadcn
+- **State Management**: Zustand
+- **API Communication**: Axios
+- **Testing**: Jest
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Development
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- pnpm package manager
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+### Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application uses environment variables for configuration. These are typically defined in `.env.development` for development and `.env` for production.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Key variables include:
+- `NEXT_PUBLIC_API_URL`: The URL of the API service
+
+Example of this file can be found in `.env.example`.
+
+## Testing
+
+Component testing is planned as a future enhancement. The testing strategy will include:
+
+- Unit tests for utility functions
+- Component tests for UI components
+- Integration tests for page components
+

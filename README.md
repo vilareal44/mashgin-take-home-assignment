@@ -1,84 +1,79 @@
-# Turborepo starter
+# Mashgin Take-Home Assignment
 
-This Turborepo starter is maintained by the Turborepo core team.
 
-## Using this example
 
-Run the following command:
+This repository contains a monorepo built with Turborepo, housing a full-stack application with a Next.js frontend and a NestJS backend. The project demonstrates modern software development practices using a TypeScript-based tech stack.
 
-```sh
-npx create-turbo@latest
-```
 
-## What's inside?
+- [Project Structure](#project-structure)
+- [Architecture](#architecture)
+  - [Projects](#projects)
+  - [Architectural Decisions](#architectural-decisions)
+- [Getting Started](#getting-started)
+- [Database](#database)
+- [Next Steps](#next-steps)
 
-This Turborepo includes the following packages/apps:
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## Project Structure
 
 ```
-cd my-turborepo
-pnpm build
+.
+├── apps/                   
+│   ├── api/                # NestJS backend application
+│   └── web/                # Next.js frontend application
+└── packages/               # Shared libraries and configurations
+    ├── eslint-config/      
+    ├── typescript-config/  
 ```
 
-### Develop
+## Architecture
 
-To develop all apps and packages, run the following command:
+[//]: # "Insert architecture diagram here"
 
-```
-cd my-turborepo
-pnpm dev
-```
+The project uses a monorepo structure managed by Turborepo and pnpm, allowing for efficient dependency management and build processes across multiple applications and shared packages. This architecture promotes code reuse while maintaining clear boundaries between services.
 
-### Remote Caching
+### Projects
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+- **API Service**: NestJS backend that provides REST API endpoints for menu items and order management. [View API Service README for more details](./apps/api/README.md).
+- **Web Application**: Next.js frontend that provides the user interface for browsing menu items and placing orders. [View Web Application README for more details](./apps/web/README.md).
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+### Architectural Decisions
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+For a detailed explanation of the key architectural and tech stack decisions made in this project, please refer to the [Architectural Decision Records](./ARCHITECTURE.md) document.
 
-```
-cd my-turborepo
-npx turbo login
-```
+## Getting Started
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+Follow these steps to set up and run the project:
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+1. Clone the repository
+2. Copy the environment variables file:
+   ```bash
+   cp .env.example .env
+   ```
+3. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+4. Prepare the local database environment:
+   ```bash
+   pnpm --filter api db:prepare
+   ```
+   This will:
+   - Generate Prisma client files
+   - Create the SQLite database
+   - Apply migrations
+   - Seed initial data
 
-```
-npx turbo link
-```
+5. Start the development servers:
+   ```bash
+   pnpm dev
+   ```
 
-## Useful Links
+## Database
 
-Learn more about the power of Turborepo:
+The backend uses SQLite for simplicity in this demonstration project. In a real-world production environment, a more robust relational database management system like PostgreSQL or MySQL would be a more appropriate choice for scalability, concurrency, and reliability.
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## Next Steps
+
+- [ ] Add end-to-end tests for the API project
+- [ ] Add component tests for the web project
