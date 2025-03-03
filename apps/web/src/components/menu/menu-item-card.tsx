@@ -35,6 +35,11 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
           className="object-contain"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
+        <div className="absolute top-2 right-2 z-10">
+          <Badge variant="secondary" className="bg-white/80 text-black backdrop-blur-sm">
+            {item.category.name}
+          </Badge>
+        </div>
       </div>
       <CardHeader>
         <div className="flex items-center justify-between">
