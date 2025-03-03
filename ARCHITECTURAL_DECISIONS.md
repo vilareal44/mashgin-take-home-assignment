@@ -29,10 +29,9 @@ I chose SQLite because it meets the needs without unnecessary complexity. Using 
 NestJS provides a structured way to build API services with TypeScript. Its dependency injection system makes testing easier, and its module system keeps code organized.
 
 #### Images
-I serve menu item images through an `/assets` route on the API. Better alternatives for production would be:
+I serve menu item images through an `/assets` route on the API. Currently the frontend project is using next/image, meaning the app is using 2 apis to serve images (one from next/image, and the other from backend service) which is not ideal. Better alternatives for production would be:
 - Using an image hosting/optimization service
 - Storing images in a service like AWS S3 and serving through a CDN
-- Using NextJS built-in image optimization (requires NextJS API feature)
 
 ### Frontend
 
