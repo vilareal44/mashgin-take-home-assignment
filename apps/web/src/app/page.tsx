@@ -1,7 +1,12 @@
+import { ErrorBoundary } from "@/components/error-boundary";
 import { MenuPage } from "@/components/menu/menu-page";
 
 export default function Home() {
-  return <MenuPage />;
+  return (
+    <ErrorBoundary>
+      <MenuPage />
+    </ErrorBoundary>
+  );
 }
 
 export const metadata = {
