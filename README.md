@@ -32,29 +32,30 @@ This repository contains a monorepo built with Turborepo, housing a full-stack a
 
 The project uses a monorepo structure managed by Turborepo and pnpm, allowing for efficient dependency management and build processes across multiple applications and shared packages. This architecture promotes code reuse while maintaining clear boundaries between services.
 
+### Architectural Decisions
+
+For a detailed explanation of the key architectural and tech stack decisions made in this project, please refer to the [Architectural Decisions](./ARCHITECTURAL_DECISIONS.md) document.
+
 ### Projects
 
 - **API Service**: NestJS backend that provides REST API endpoints for menu items and order management. [View API Service README for more details](./apps/api/README.md).
 - **Web Application**: Next.js frontend that provides the user interface for browsing menu items and placing orders. [View Web Application README for more details](./apps/web/README.md).
 
-### Architectural Decisions
 
-For a detailed explanation of the key architectural and tech stack decisions made in this project, please refer to the [Architectural Decision Records](./ARCHITECTURE.md) document.
 
 ## Getting Started
 
 Follow these steps to set up and run the project:
 
-1. Clone the repository
-2. Copy the environment variables file:
+1. Copy the environment variables file:
    ```bash
-   cp .env.example .env
+   cp apps/api/.env.example apps/api/.env
    ```
-3. Install dependencies:
+2. Install dependencies:
    ```bash
    pnpm install
    ```
-4. Prepare the local database environment:
+3. Prepare the local database environment:
    ```bash
    pnpm --filter api db:prepare
    ```
@@ -64,7 +65,7 @@ Follow these steps to set up and run the project:
    - Apply migrations
    - Seed initial data
 
-5. Start the development servers:
+4. Start the development servers:
    ```bash
    pnpm dev
    ```
