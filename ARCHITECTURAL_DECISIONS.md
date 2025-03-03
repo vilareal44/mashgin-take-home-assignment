@@ -30,6 +30,13 @@ I went with SQLite for this project because it's simpler than more robust option
 
 I picked NestJS for my backend because it gives me a simple and organized way to build API services, and it works great with TypeScript. It also has built-in dependency injection, which makes testing easier. Plus, its module system keeps the code neat and organized.
 
+#### Images
+I decided to serve menu item images through a `/assets` route on the api. This is probably not ideal. I can think of a few solution would be better, like:
+- host images on a proper image hosting and optimization service (e.g. kraken.io)
+- upload images to storage service (e.g aws S3) and serve them through a CDN service (e.g aws cloudfront)
+- use NextJS next/image component.
+  - Note: This project uses the next/image component, which requires Next.js API capabilities. However, I believe it could be deployed as a static application without Next.js APIs, simplifying the setup and reducing infrastructure overhead. I decide to use it only for showcasing and development purposes.
+
 ### Frontend
 
 For the frontend, I decided to go with NextJS, Tailwind CSS and Shadcn components. This combination gives me a solid starting point with built-in TypeScript on NextJS.  When it came to state management, I thought about using Redux with Redux-Toolkit, but ultimately chose Zustand instead because it's less complex and requires less boilerplate code while still meeting all my needs for this project.
